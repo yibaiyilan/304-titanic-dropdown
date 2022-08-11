@@ -18,7 +18,7 @@ githublink = 'https://github.com/yibaiyilan/304-titanic-dropdown.git'
 
 
 ###### Import a dataframe #######
-df = pd.read_csv("https://git.generalassemb.ly/intuit-ds-15/05-cleaning-combining-data/blob/master/data/drinks.csv")
+df = pd.read_csv('https://raw.git.generalassemb.ly/intuit-ds-15/05-cleaning-combining-data/master/data/drinks.csv?token=AAAK2LPHP3AY6NSYEPWPUFLC7NBC2',on_bad_lines='skip')
 variables_list=['AF', 'AS', 'EU']
 
 ########### Initiate the app
