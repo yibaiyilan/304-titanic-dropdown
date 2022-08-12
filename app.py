@@ -49,7 +49,7 @@ app.layout = html.Div([
 @app.callback(Output('display-value', 'figure'),
               [Input('dropdown', 'value')])
 def display_value(continuous_var):
-    grouped_mean=df.groupby(['continent',pd.cut(df["total_litres_of_pure_alcohol"], np.arange(0, 18, 3)).astype(str)]).mean()
+    grouped_mean=df.groupby(['continent',pd.cut(df["total_litres_of_pure_alcohol"], np.arange(0, 18, 3)).astype(str)])[continuous_var].mean()
     results=pd.DataFrame(grouped_mean).dropna()
     # Create a grouped bar chart
     mydata1 = go.Bar(
