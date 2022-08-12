@@ -11,8 +11,10 @@ import plotly.graph_objs as go
 ###### Define your variables #####
 tabtitle = 'Drinks!'
 color1='#92A5E8'
-color2='#8E44AD'
+color2='#FF82AB'
 color3='#FFC300'
+color4='#228B22'
+color5='#33A1C9'
 sourceurl = 'https://git.generalassemb.ly/intuit-ds-15/05-cleaning-combining-data/blob/master/data/drinks.csv'
 githublink = 'https://github.com/yibaiyilan/304-titanic-dropdown.git'
 
@@ -47,38 +49,50 @@ app.layout = html.Div([
 @app.callback(Output('display-value', 'figure'),
               [Input('dropdown', 'value')])
 def display_value(continuous_var):
-    grouped_mean=df.groupby(['continent',pd.cut(df["total_litres_of_pure_alcohol"], np.arange(0, 18, 3))]).mean()
-    results=pd.DataFrame(grouped_mean)
+    grouped_mean=df.groupby(['continent',pd.cut(df["total_litres_of_pure_alcohol"], np.arange(0, 18, 3)).astype(str)]).mean()
+    results=pd.DataFrame(grouped_mean).dropna()
     # Create a grouped bar chart
     mydata1 = go.Bar(
-        x=results.loc['AF'].index,
-        y=results.loc['AF'][continuous_var],
-        name='Africa',
-        marker=dict(color=color1)
+    x=results.loc['AF'].index,
+    y=results.loc['AF'][variables_list],
+    name='Africa',
+    marker=dict(color=color1)
     )
     mydata2 = go.Bar(
         x=results.loc['AS'].index,
-        y=results.loc['AS'][continuous_var],
+        y=results.loc['AS'][variables_list],
         name='Asia',
         marker=dict(color=color2)
     )
     mydata3 = go.Bar(
         x=results.loc['EU'].index,
-        y=results.loc['EU'][continuous_var],
+        y=results.loc['EU'][variables_list],
         name='Europe',
         marker=dict(color=color3)
+    )
+    mydata4 = go.Bar(
+        x=results.loc['OC'].index,
+        y=results.loc['OC'][variables_list],
+        name='Oceania',
+        marker=dict(color=color4)
+    )
+    mydata5 = go.Bar(
+        x=results.loc['SA'].index,
+        y=results.loc['SA'][variables_list],
+        name='South America',
+        marker=dict(color=color5)
     )
 
     mylayout = go.Layout(
         title='Grouped bar chart',
         xaxis = dict(title = 'Total Litres of Pure Alcohol'), # x-axis label
-        yaxis = dict(title = str(continuous_var)), # y-axis label
+        yaxis = dict(title = str(variables_list)), # y-axis label
 
     )
-    fig = go.Figure(data=[mydata1, mydata2, mydata3], layout=mylayout)
+    fig = go.Figure(data=[mydata1, mydata2, mydata3,mydata4,mydata5], layout=mylayout)
     return fig
 
 
-######### Run the app #########
+######### Run the app, good luck#########
 if __name__ == '__main__':
     app.run_server(debug=True)
