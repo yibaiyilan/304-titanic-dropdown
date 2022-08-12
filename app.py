@@ -6,6 +6,7 @@ from dash.dependencies import Input, Output, State
 import pandas as pd
 import plotly as py
 import plotly.graph_objs as go
+import numpy as np
 
 
 ###### Define your variables #####
