@@ -54,31 +54,31 @@ def display_value(continuous_var):
     # Create a grouped bar chart
     mydata1 = go.Bar(
     x=results.loc['AF'].index,
-    y=results.loc['AF'][variables_list],
+    y=results.loc['AF'][continuous_var],
     name='Africa',
     marker=dict(color=color1)
     )
     mydata2 = go.Bar(
         x=results.loc['AS'].index,
-        y=results.loc['AS'][variables_list],
+        y=results.loc['AS'][continuous_var],
         name='Asia',
         marker=dict(color=color2)
     )
     mydata3 = go.Bar(
         x=results.loc['EU'].index,
-        y=results.loc['EU'][variables_list],
+        y=results.loc['EU'][continuous_var],
         name='Europe',
         marker=dict(color=color3)
     )
     mydata4 = go.Bar(
         x=results.loc['OC'].index,
-        y=results.loc['OC'][variables_list],
+        y=results.loc['OC'][continuous_var],
         name='Oceania',
         marker=dict(color=color4)
     )
     mydata5 = go.Bar(
         x=results.loc['SA'].index,
-        y=results.loc['SA'][variables_list],
+        y=results.loc['SA'][continuous_var],
         name='South America',
         marker=dict(color=color5)
     )
@@ -86,7 +86,7 @@ def display_value(continuous_var):
     mylayout = go.Layout(
         title='Grouped bar chart',
         xaxis = dict(title = 'Total Litres of Pure Alcohol'), # x-axis label
-        yaxis = dict(title = str(variables_list)), # y-axis label
+        yaxis = dict(title = str(continuous_var)), # y-axis label
 
     )
     fig = go.Figure(data=[mydata1, mydata2, mydata3,mydata4,mydata5], layout=mylayout)
